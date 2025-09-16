@@ -281,5 +281,68 @@ const timer = setInterval(() => {
 })();
 </script>
 
+
+<!-- POPUP DE COMPRA EM LOOP -->
+<style>
+  .popup-compra {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    background: #111;
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(227,22,22,.6);
+    box-shadow: 0 0 20px rgba(227,22,22,.5);
+    font-size: .9rem;
+    display: none;
+    z-index: 999;
+    animation: fadeInOut 6s forwards;
+  }
+  @keyframes fadeInOut {
+    0% {opacity:0;transform:translateY(20px)}
+    10% {opacity:1;transform:translateY(0)}
+    90% {opacity:1;transform:translateY(0)}
+    100% {opacity:0;transform:translateY(20px)}
+  }
+</style>
+
+<div id="popup-compra" class="popup-compra"></div>
+
+<script>
+const nomes = [
+  "Carlos de São Paulo",
+  "Ana de Belo Horizonte",
+  "Marcos do Rio de Janeiro",
+  "Juliana de Curitiba",
+  "Pedro de Salvador",
+  "Fernanda de Brasília",
+  "Ricardo de Recife",
+  "Camila de Fortaleza",
+  "Lucas de Porto Alegre",
+  "Patrícia de Manaus"
+];
+
+let i = 0;
+
+function mostrarPopup() {
+  const popup = document.getElementById("popup-compra");
+  popup.innerHTML = `${nomes[i]} acabou de adquirir o <strong>Controle Absoluto</strong> ✅`;
+  popup.style.display = "block";
+
+  setTimeout(() => { popup.style.display = "none"; }, 6000);
+
+  i++;
+  if (i >= nomes.length) i = 0; // Reinicia quando chega no final
+}
+
+// Mostra o popup a cada 15 segundos infinitamente
+setInterval(mostrarPopup, 15000);
+
+// Mostra o primeiro imediatamente
+mostrarPopup();
+</script>
+
+
 </body>
 </html>
