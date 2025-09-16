@@ -74,7 +74,6 @@
     .floating svg{width:16px;height:16px;fill:var(--red)}
     @keyframes blink{0%,22%,100%{opacity:1}50%,75%{opacity:0.35}}
 
-    /* ===== CTA agressivo abaixo da VSL ===== */
     .cta-aggressive{
       display:inline-block;margin:18px auto 0;padding:18px 30px;border-radius:12px;
       font-size:1.1rem;font-weight:900;background:linear-gradient(180deg,#ff1a1a,#800000);
@@ -85,7 +84,6 @@
     @keyframes pulse{0%{box-shadow:0 0 12px rgba(255,0,0,.6)}50%{box-shadow:0 0 26px rgba(255,0,0,1)}100%{box-shadow:0 0 12px rgba(255,0,0,.6)}}
     .hidden{display:none}
 
-    /* ===== Lock de exibição: esconde todo o resto até 95s ===== */
     body.delay-lock section:not(.hero),
     body.delay-lock .blade,
     body.delay-lock .cols,
@@ -131,21 +129,20 @@
   </div>
 </div>
 
-<!-- CTA AGRESSIVO ABAIXO DA VSL (inicialmente oculto) -->
+<!-- CTA agressivo -->
 <div id="cta-vsl" class="hidden" style="text-align:center">
-  <a href="#checkout" class="cta-aggressive">🔥 QUERO DOMINAR MINHA PERFORMANCE AGORA</a>
+  <a href="https://go.tribopay.com.br/hv2ffayiwn" class="cta-aggressive">🔥 QUERO DOMINAR MINHA PERFORMANCE AGORA</a>
 </div>
 
-  
-  <div class="blade">
-    <p>Se você já fugiu de um encontro por <span class="red">medo de falhar</span>, você sabe como a cabeça vira inimiga. Isso não te define — <strong>é um padrão mental condicionável</strong>.</p>
-    <p>O <strong>Controle Absoluto</strong> corta esse ciclo com técnica. Você aprende a desligar o alarme falso do cérebro, reconquistar a segurança no corpo e voltar a aproveitar o sexo como deveria.</p>
-  </div>
+<div class="blade">
+  <p>Se você já fugiu de um encontro por <span class="red">medo de falhar</span>, você sabe como a cabeça vira inimiga. Isso não te define — <strong>é um padrão mental condicionável</strong>.</p>
+  <p>O <strong>Controle Absoluto</strong> corta esse ciclo com técnica. Você aprende a desligar o alarme falso do cérebro, reconquistar a segurança no corpo e voltar a aproveitar o sexo como deveria.</p>
+</div>
 
-  <div class="cols">
-    <div class="panel"><h3>Sem Enrolação:</h3><div class="list"><div>✔ Sem remédios</div><div>✔ Sem promessas vazias</div><div>✔ Discreto e protegido</div><div>✔ Validado por milhares</div></div></div>
-    <div class="panel"><h3>O que você vai desbloquear:</h3><div class="list"><div>🔥 Técnicas mentais</div><div>⚡ Neutralizar o medo</div><div>💡 Recuperar confiança</div><div>❤️ Ativar o prazer real</div><div>🛡️ Transformar recaídas</div></div></div>
-  </div>
+<div class="cols">
+  <div class="panel"><h3>Sem Enrolação:</h3><div class="list"><div>✔ Sem remédios</div><div>✔ Sem promessas vazias</div><div>✔ Discreto e protegido</div><div>✔ Validado por milhares</div></div></div>
+  <div class="panel"><h3>O que você vai desbloquear:</h3><div class="list"><div>🔥 Técnicas mentais</div><div>⚡ Neutralizar o medo</div><div>💡 Recuperar confiança</div><div>❤️ Ativar o prazer real</div><div>🛡️ Transformar recaídas</div></div></div>
+</div>
 </main>
 
 <!-- 3 BENEFÍCIOS -->
@@ -171,7 +168,7 @@
   </div>
 </section>
 
-<!-- PREÇO (vertical e centralizado) -->
+<!-- PREÇO -->
 <section class="section">
   <div class="price">
     <div style="margin-bottom:10px;font-size:1rem;color:#ff5555;font-weight:700" id="countdown">
@@ -190,7 +187,7 @@
       <div>✔ Oferta válida apenas hoje</div>
     </div>
     <div style="margin-top:16px;text-align:center">
-      <a class="cta" href="#checkout">
+      <a class="cta" href="https://go.tribopay.com.br/hv2ffayiwn">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 0 1 6 0v3H9z"/></svg>
         <span>Quero Acessar o Método Agora</span>
       </a>
@@ -209,18 +206,17 @@
 </div>
 
 <script>
-// ===== Delay de 1:35 (95s) =====
-// Esconde o resto da página até liberar e mostra o CTA abaixo da VSL
+// Delay de 1:35 (95s)
 document.addEventListener('DOMContentLoaded', function(){
-  document.body.classList.add('delay-lock'); // trava exibição do restante
+  document.body.classList.add('delay-lock');
   setTimeout(function(){
     var cta = document.getElementById('cta-vsl');
     if(cta){ cta.classList.remove('hidden'); }
-    document.body.classList.remove('delay-lock'); // libera o restante
+    document.body.classList.remove('delay-lock');
   }, 95000);
 });
 
-// Contador regressivo de 4 minutos (já existente)
+// Contador regressivo de 4 minutos
 let time = 4 * 60; 
 const countdownEl = document.getElementById("countdown");
 const timer = setInterval(() => {
