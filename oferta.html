@@ -1,5 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+<script>
+  window.pixelId = "68c8c474648bfb224dfe38db";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -124,6 +143,69 @@ const timer = setInterval(() => {
     countdownEl.innerHTML = "Oferta encerrada!";
   }
 }, 1000);
+</script>
+
+
+
+<!-- POPUP DE COMPRA EM LOOP -->
+<style>
+  .popup-compra {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    background: #111;
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(227,22,22,.6);
+    box-shadow: 0 0 20px rgba(227,22,22,.5);
+    font-size: .9rem;
+    display: none;
+    z-index: 999;
+    animation: fadeInOut 6s forwards;
+  }
+  @keyframes fadeInOut {
+    0% {opacity:0;transform:translateY(20px)}
+    10% {opacity:1;transform:translateY(0)}
+    90% {opacity:1;transform:translateY(0)}
+    100% {opacity:0;transform:translateY(20px)}
+  }
+</style>
+
+<div id="popup-compra" class="popup-compra"></div>
+
+<script>
+const nomes = [
+  "Carlos de São Paulo",
+  "João de Belo Horizonte",
+  "Marcos do Rio de Janeiro",
+  "Felipe de Curitiba",
+  "Pedro de Salvador",
+  "Fernando de Brasília",
+  "Ricardo de Recife",
+  "José de Fortaleza",
+  "Lucas de Porto Alegre",
+  "Maicon de Manaus"
+];
+
+let i = 0;
+
+function mostrarPopup() {
+  const popup = document.getElementById("popup-compra");
+  popup.innerHTML = `${nomes[i]} acabou de adquirir o <strong>Controle Absoluto</strong> ✅`;
+  popup.style.display = "block";
+
+  setTimeout(() => { popup.style.display = "none"; }, 6000);
+
+  i++;
+  if (i >= nomes.length) i = 0; // Reinicia quando chega no final
+}
+
+// Mostra o popup a cada 15 segundos infinitamente
+setInterval(mostrarPopup, 15000);
+
+// Mostra o primeiro imediatamente
+mostrarPopup();
 </script>
 
 </body>
