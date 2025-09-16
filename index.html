@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<link rel="preload" href="https://scripts.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/players/68c74b2e6d470f9d2862ad2f/v4/embed.html">
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/players/68c74b2e6d470f9d2862ad2f/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/68c74b25e211203eaaf029a0/main.m3u8" as="fetch">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://api.vturb.com.br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Controle Absoluto</title>
+  <link rel="icon" type="image/png" href="https://i.ibb.co/qMJfqdP7/Captura-de-tela-2025-09-14-115714.png" />
+
+  <style>
+    :root{
+      --bg:#000;--panel:#111;--panel-2:#0b0b0b;
+      --text:#e7e7e7;--muted:#b9b9b9;--red:#e31616;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{text-decoration:none;color:inherit}
+
+    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;z-index:50;background:#000;border-bottom:1px solid rgba(227,22,22,.25);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .nav{display:flex;align-items:center;gap:14px;padding:14px 0}
+    .logo{width:54px;height:54px;border-radius:50%;object-fit:cover;box-shadow:0 0 22px rgba(227,22,22,.55)}
+    .brand{font-weight:800;letter-spacing:.5px}
+    .brand span{color:var(--red);text-shadow:0 0 16px rgba(227,22,22,.7)}
+    .badge-mini{margin-left:auto;font-size:.85rem;border:1px solid rgba(227,22,22,.3);padding:6px 10px;border-radius:999px;color:#fff;background:#111}
+
+    .hero{text-align:center;padding:36px 0 16px}
+    .hero h1{margin:6px 0 8px;font-size:clamp(32px,3.6vw,56px);line-height:1.05;font-weight:900}
+    .hero h1 .accent{color:var(--red);text-shadow:0 0 22px rgba(227,22,22,.55)}
+    .hero .sub{opacity:.9;margin:8px 0 14px;font-size:clamp(14px,1.3vw,18px)}
+    .hero .line{color:var(--muted);margin-top:6px}
+
+    .vsl{margin:28px auto;max-width:900px;border-radius:16px;overflow:hidden;border:2px solid rgba(255,59,59,.45);box-shadow:0 0 25px rgba(227,22,22,.45)}
+    .vsl iframe{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
+
+    .blade{max-width:980px;margin:26px auto;padding:18px 16px;border-radius:var(--radius);background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid rgba(255,59,59,.22);box-shadow:0 0 24px rgba(227,22,22,.25);text-align:center;font-size:1.05rem;color:#d9d9d9}
+
+    .cols{display:grid;gap:18px;margin:26px 0}
+    @media(min-width:900px){.cols{grid-template-columns:1fr 1fr}}
+    .panel{background:#0f0f0f;border:1px solid rgba(255,59,59,.22);border-radius:12px;padding:18px;box-shadow:0 0 18px rgba(227,22,22,.18)}
+    .panel h3{margin:4px 0 12px;font-size:1.15rem}
+    .list{display:grid;gap:10px;font-size:.95rem}
+
+    .section{padding:30px 0}
+
+    .grid-3,.grid-4{display:grid;gap:14px;text-align:center}
+    @media(min-width:950px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:950px){.grid-4{grid-template-columns:repeat(4,1fr)}}
+
+    .bonus-card{background:linear-gradient(180deg,#1c1c1c,#0c0c0c);border:1px solid rgba(255,59,59,.35);border-radius:12px;padding:14px 10px;box-shadow:0 0 14px rgba(227,22,22,.3);color:#f6f6f6}
+    .bonus-card h4{margin:4px 0 6px;font-size:1rem;color:#fff}
+    .bonus-card p{font-size:.85rem;margin:0}
+
+    .price{max-width:560px;margin:20px auto;padding:18px;border-radius:16px;background:#101010;border:1px solid rgba(255,59,59,.35);box-shadow:0 0 28px rgba(227,22,22,.35);text-align:center}
+    .price .value{display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;font-size:38px;color:#fff;text-shadow:0 0 18px rgba(227,22,22,.55);margin:10px 0}
+    .price .value span{font-size:22px;color:#aaa;text-decoration:line-through;margin-bottom:6px}
+    .bullets{margin:12px auto;display:grid;gap:8px;text-align:center;font-size:.95rem}
+
+    .cta{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:12px;color:#fff;font-weight:800;background:linear-gradient(180deg,#1a1a1a,#2a0000);border:1px solid rgba(227,22,22,.65);box-shadow:0 0 16px rgba(227,22,22,.25);transition:.3s}
+    .cta:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 0 30px rgba(227,22,22,.55)}
+
+    .floating{position:fixed;right:18px;bottom:18px;z-index:60;display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;font-weight:700;background:#000;border:1px solid var(--red);color:var(--red);animation:blink 4s infinite}
+    .floating svg{width:16px;height:16px;fill:var(--red)}
+    @keyframes blink{0%,22%,100%{opacity:1}50%,75%{opacity:0.35}}
+
+    /* ===== CTA agressivo abaixo da VSL ===== */
+    .cta-aggressive{
+      display:inline-block;margin:18px auto 0;padding:18px 30px;border-radius:12px;
+      font-size:1.1rem;font-weight:900;background:linear-gradient(180deg,#ff1a1a,#800000);
+      border:1px solid rgba(255,0,0,.7);color:#fff;text-transform:uppercase;
+      box-shadow:0 0 20px rgba(255,0,0,.6);animation:pulse 2s infinite
+    }
+    .cta-aggressive:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(255,0,0,.85)}
+    @keyframes pulse{0%{box-shadow:0 0 12px rgba(255,0,0,.6)}50%{box-shadow:0 0 26px rgba(255,0,0,1)}100%{box-shadow:0 0 12px rgba(255,0,0,.6)}}
+    .hidden{display:none}
+
+    /* ===== Lock de exibição: esconde todo o resto até 95s ===== */
+    body.delay-lock section:not(.hero),
+    body.delay-lock .blade,
+    body.delay-lock .cols,
+    body.delay-lock footer,
+    body.delay-lock .floating { display:none !important; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <img class="logo" src="https://i.ibb.co/qMJfqdP7/Captura-de-tela-2025-09-14-115714.png" alt="Controle Absoluto" />
+    <div class="brand">Método <span>Controle Absoluto</span></div>
+    <div class="badge-mini">Discreto • 100% Online</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Chegou o <span class="accent">Controle Absoluto</span></h1>
+    <div class="sub">O Método Anti-Ansiedade Sexual</div>
+    <p class="line">Sem papo furado. Sem promessas vazias. Só aquilo que faz a sua mente parar de te sabotar.</p>
+  </section>
+
+<script type="text/javascript">
+  var s = document.createElement("script");
+  s.src = "https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js";
+  s.async = true;
+  document.head.appendChild(s);
+</script>
+
+<div id="ifr_68c74b2e6d470f9d2862ad2f_wrapper" style="margin: 0 auto; width: 100%;">
+  <div id="ifr_68c74b2e6d470f9d2862ad2f_aspect" style="position: relative; padding: 56.6666666667% 0 0 0;">
+    <iframe
+      id="ifr_68c74b2e6d470f9d2862ad2f"
+      frameborder="0"
+      allowfullscreen
+      src="about:blank"
+      referrerpolicy="origin"
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+      onload="this.onload=null; this.src='https://scripts.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/players/68c74b2e6d470f9d2862ad2f/v4/embed.html' + (location.search || '?') + '&vl=' + encodeURIComponent(location.href)">
+    </iframe>
+  </div>
+</div>
+
+<!-- CTA AGRESSIVO ABAIXO DA VSL (inicialmente oculto) -->
+<div id="cta-vsl" class="hidden" style="text-align:center">
+  <a href="#checkout" class="cta-aggressive">🔥 QUERO DOMINAR MINHA PERFORMANCE AGORA</a>
+</div>
+
+  
+  <div class="blade">
+    <p>Se você já fugiu de um encontro por <span class="red">medo de falhar</span>, você sabe como a cabeça vira inimiga. Isso não te define — <strong>é um padrão mental condicionável</strong>.</p>
+    <p>O <strong>Controle Absoluto</strong> corta esse ciclo com técnica. Você aprende a desligar o alarme falso do cérebro, reconquistar a segurança no corpo e voltar a aproveitar o sexo como deveria.</p>
+  </div>
+
+  <div class="cols">
+    <div class="panel"><h3>Sem Enrolação:</h3><div class="list"><div>✔ Sem remédios</div><div>✔ Sem promessas vazias</div><div>✔ Discreto e protegido</div><div>✔ Validado por milhares</div></div></div>
+    <div class="panel"><h3>O que você vai desbloquear:</h3><div class="list"><div>🔥 Técnicas mentais</div><div>⚡ Neutralizar o medo</div><div>💡 Recuperar confiança</div><div>❤️ Ativar o prazer real</div><div>🛡️ Transformar recaídas</div></div></div>
+  </div>
+</main>
+
+<!-- 3 BENEFÍCIOS -->
+<section class="section">
+  <div class="grid-3" style="max-width:1000px;margin:0 auto">
+    <div class="bonus-card"><h4>🔥 Método direto</h4><p>Protocolos curtos que você aplica antes, durante e depois do sexo.</p></div>
+    <div class="bonus-card"><h4>💡 Psicologia aplicada</h4><p>Ferramentas cognitivas + técnicas corporais para quebrar a resposta de ansiedade.</p></div>
+    <div class="bonus-card"><h4>🛡️ Discreto e seguro</h4><p>Acesso privado, do seu celular. Sem ninguém saber.</p></div>
+  </div>
+</section>
+
+<!-- 4 BÔNUS -->
+<section class="section">
+  <div style="text-align:center;margin-bottom:20px">
+    <h2>🎁 4 Bônus Exclusivos</h2>
+    <p>Tudo isso será seu <span style="color:#e31616;font-weight:700">sem custo adicional</span>, ao garantir o acesso hoje.</p>
+  </div>
+  <div class="grid-4" style="max-width:1100px;margin:0 auto">
+    <div class="bonus-card"><h4>🎁 Bônus 1 – Técnica dos 7 Segundos</h4><p>Um simples ajuste de foco mental que você pode aplicar antes da relação e reduzir instantaneamente a ansiedade.</p></div>
+    <div class="bonus-card"><h4>🎁 Bônus 2 – Frases Mentais de Controle</h4><p>Um mini-guia com 3 frases curtas para silenciar o medo na hora H. Aplique em qualquer situação, com qualquer mulher.</p></div>
+    <div class="bonus-card"><h4>🎁 Bônus 3 – Ritual Pré-Encontro</h4><p>Um passo a passo de 5 minutos para treinar sua mente antes de sair de casa. Ideal para quem vai encontrar alguém novo.</p></div>
+    <div class="bonus-card"><h4>🎁 Bônus 4 – Áudio Guiado de Respiração Masculina</h4><p>Um áudio exclusivo para ouvir antes do sexo, que acalma o sistema nervoso e aumenta a sensação de domínio e controle.</p></div>
+  </div>
+</section>
+
+<!-- PREÇO (vertical e centralizado) -->
+<section class="section">
+  <div class="price">
+    <div style="margin-bottom:10px;font-size:1rem;color:#ff5555;font-weight:700" id="countdown">
+      Oferta expira em: 04:00
+    </div>
+    <div class="muted">Oferta Especial</div>
+    <div class="value">
+      <span>R$ 129,90</span>
+      R$ 19,90
+    </div>
+    <div class="bullets">
+      <div>✔ Acesso completo ao método</div>
+      <div>✔ Atualizações inclusas</div>
+      <div>✔ Garantia de 7 dias</div>
+      <div>✔ Bônus exclusivos incluídos</div>
+      <div>✔ Oferta válida apenas hoje</div>
+    </div>
+    <div style="margin-top:16px;text-align:center">
+      <a class="cta" href="#checkout">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 0 1 6 0v3H9z"/></svg>
+        <span>Quero Acessar o Método Agora</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap" style="padding:40px 0;text-align:center;border-top:1px solid rgba(255,59,59,.25)">
+  <img src="https://i.ibb.co/qMJfqdP7/Captura-de-tela-2025-09-14-115714.png" style="width:46px;height:46px;border-radius:50%;box-shadow:0 0 18px rgba(227,22,22,.5)"/>
+  <div style="margin-top:10px;color:#9a9a9a">© 2025 Controle Absoluto — Todos os direitos reservados.</div>
+</footer>
+
+<div class="floating">
+  <svg viewBox="0 0 24 24"><path d="M20.3 5.7l-11 11-5-5 1.4-1.4 3.6 3.6 9.6-9.6z"/></svg>
+  <span>Garantia de 7 dias</span>
+</div>
+
+<script>
+// ===== Delay de 1:35 (95s) =====
+// Esconde o resto da página até liberar e mostra o CTA abaixo da VSL
+document.addEventListener('DOMContentLoaded', function(){
+  document.body.classList.add('delay-lock'); // trava exibição do restante
+  setTimeout(function(){
+    var cta = document.getElementById('cta-vsl');
+    if(cta){ cta.classList.remove('hidden'); }
+    document.body.classList.remove('delay-lock'); // libera o restante
+  }, 95000);
+});
+
+// Contador regressivo de 4 minutos (já existente)
+let time = 4 * 60; 
+const countdownEl = document.getElementById("countdown");
+const timer = setInterval(() => {
+  let minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+  if(countdownEl){ countdownEl.innerHTML = `Oferta expira em: ${minutes}:${seconds}`; }
+  time--;
+  if (time < 0) {
+    clearInterval(timer);
+    if(countdownEl){ countdownEl.innerHTML = "Oferta encerrada!"; }
+  }
+}, 1000);
+</script>
+
+<script>
+(function () {
+  const BACK_URL = "https://suaofertaaqui";
+  let armed = true;
+  let navigating = false;
+
+  document.addEventListener("click", function (e) {
+    const a = e.target.closest("a");
+    if (a && a.href) {
+      navigating = true;
+      armed = false;
+      setTimeout(() => { navigating = false; armed = true; }, 1500);
+    }
+  }, true);
+
+  function trapHistory() {
+    try { history.pushState({}, "", location.href); } catch(e) {}
+  }
+  trapHistory();
+  setTimeout(trapHistory, 60);
+
+  window.addEventListener("popstate", function () {
+    if (armed) {
+      location.replace(BACK_URL);
+    } else {
+      setTimeout(trapHistory, 100);
+    }
+  });
+
+  window.addEventListener("pagehide", function () {
+    if (armed && !navigating) {
+      location.replace(BACK_URL);
+    }
+  });
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden" && armed && !navigating) {
+      location.replace(BACK_URL);
+    }
+  });
+
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted && armed && !navigating) {
+      location.replace(BACK_URL);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
