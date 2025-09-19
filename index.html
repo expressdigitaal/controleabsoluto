@@ -285,8 +285,6 @@ const timer = setInterval(() => {
   });
 })();
 </script>
-
-
 <!-- POPUP DE COMPRA EM LOOP -->
 <style>
   .popup-compra {
@@ -348,6 +346,92 @@ setInterval(mostrarPopup, 15000);
 mostrarPopup();
 </script>
 
+<!-- === TRACKING INJETADO: NÃO ALTERE MAIS NADA ABAIXO === -->
+
+<!-- EVENTO AO ENTRAR NA PÁGINA DE VENDAS -->
+<script>
+  (function() {
+    const pixelId = window.pixelId || "68c8c474648bfb224dfe38db";
+    try {
+      fetch("https://cdn.utmify.com.br/scripts/pixel/event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          pixel_id: pixelId,
+          event_name: "PageViewVenda",
+          custom_data: {
+            origem: "Página de Vendas",
+            tipo: "Visualização VSL"
+          }
+        })
+      });
+    } catch (e) {
+      // fail silently to avoid breaking page
+      console && console.error && console.error("Pixel PageViewVenda error", e);
+    }
+  })();
+</script>
+
+<!-- EVENTO AO CLICAR NO BOTÃO DE COMPRA -->
+<script>
+  (function() {
+    function trackClick() {
+      try {
+        fetch("https://cdn.utmify.com.br/scripts/pixel/event", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            pixel_id: window.pixelId,
+            event_name: "LeadComprador",
+            custom_data: {
+              ação: "Clicou no botão de compra",
+              origem: "Página de Vendas"
+            }
+          })
+        });
+      } catch (e) {
+        console && console.error && console.error("Pixel LeadComprador error", e);
+      }
+    }
+
+    // Selectors usados (mantém compatibilidade com seus CTAs)
+    var selectors = [
+      'a[href*="tribopay"]',
+      'a.cta',
+      'a.cta-aggressive',
+      '#cta-vsl a'
+    ];
+
+    function attach() {
+      selectors.forEach(function(sel) {
+        try {
+          var nodes = document.querySelectorAll(sel);
+          nodes.forEach(function(el) {
+            // evita múltiplos listeners
+            el.removeEventListener('click', trackClick);
+            el.addEventListener('click', trackClick);
+          });
+        } catch (e) {
+          // ignore selector errors
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', attach);
+    } else {
+      attach();
+    }
+
+    // Também observa mudanças dinâmicas (caso o botão seja renderizado depois)
+    try {
+      var obs = new MutationObserver(function() { attach(); });
+      obs.observe(document.body, { childList: true, subtree: true });
+    } catch (e) {
+      // se MutationObserver não disponível, tudo bem
+    }
+  })();
+</script>
 
 </body>
 </html>
