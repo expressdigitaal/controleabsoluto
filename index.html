@@ -107,7 +107,6 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="wrap nav">
     <img class="logo" src="https://i.ibb.co/qMJfqdP7/Captura-de-tela-2025-09-14-115714.png" alt="Controle Absoluto" />
@@ -285,6 +284,7 @@ const timer = setInterval(() => {
   });
 })();
 </script>
+
 <!-- POPUP DE COMPRA EM LOOP -->
 <style>
   .popup-compra {
@@ -339,10 +339,7 @@ function mostrarPopup() {
   if (i >= nomes.length) i = 0; // Reinicia quando chega no final
 }
 
-// Mostra o popup a cada 15 segundos infinitamente
 setInterval(mostrarPopup, 15000);
-
-// Mostra o primeiro imediatamente
 mostrarPopup();
 </script>
 
@@ -366,7 +363,6 @@ mostrarPopup();
         })
       });
     } catch (e) {
-      // fail silently to avoid breaking page
       console && console.error && console.error("Pixel PageViewVenda error", e);
     }
   })();
@@ -394,7 +390,6 @@ mostrarPopup();
       }
     }
 
-    // Selectors usados (mantém compatibilidade com seus CTAs)
     var selectors = [
       'a[href*="tribopay"]',
       'a.cta',
@@ -407,13 +402,10 @@ mostrarPopup();
         try {
           var nodes = document.querySelectorAll(sel);
           nodes.forEach(function(el) {
-            // evita múltiplos listeners
             el.removeEventListener('click', trackClick);
             el.addEventListener('click', trackClick);
           });
-        } catch (e) {
-          // ignore selector errors
-        }
+        } catch (e) {}
       });
     }
 
@@ -423,13 +415,10 @@ mostrarPopup();
       attach();
     }
 
-    // Também observa mudanças dinâmicas (caso o botão seja renderizado depois)
     try {
       var obs = new MutationObserver(function() { attach(); });
       obs.observe(document.body, { childList: true, subtree: true });
-    } catch (e) {
-      // se MutationObserver não disponível, tudo bem
-    }
+    } catch (e) {}
   })();
 </script>
 
