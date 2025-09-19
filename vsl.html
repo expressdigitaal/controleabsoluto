@@ -111,7 +111,13 @@
     <div id="score-display">Pontuação: 0 pontos</div>
   </div>
 
-  <!-- ÁUDIO FINAL FUNCIONAL VIA CATBOX -->
+  <!-- 🎧 ÁUDIOS CATBOX -->
+  <audio id="sound-click" preload="auto">
+    <source src="https://files.catbox.moe/k1svs3.mp3" type="audio/mp3">
+  </audio>
+  <audio id="sound-spin" preload="auto">
+    <source src="https://files.catbox.moe/7bonqg.mp3" type="audio/mp3">
+  </audio>
   <audio id="sound-final" preload="auto">
     <source src="https://files.catbox.moe/gangvk.mp3" type="audio/mp3">
   </audio>
@@ -141,7 +147,10 @@
         const btn = document.createElement("div");
         btn.className = "option";
         btn.innerText = opt;
-        btn.onclick = () => nextQuestion(i);
+        btn.onclick = () => {
+          document.getElementById("sound-click").play();
+          nextQuestion(i);
+        };
         optDiv.appendChild(btn);
       });
       document.getElementById("progress-bar").style.width = ((current) / questions.length * 100) + "%";
@@ -180,7 +189,8 @@
     }
 
     function spinWheel() {
-      document.getElementById("sound-final").play();
+      document.getElementById("sound-spin").play();
+
       const wheelBox = document.getElementById("wheel-box");
       wheelBox.innerHTML = `
         <div style="position:relative;width:250px;height:250px;margin:auto;">
@@ -214,6 +224,7 @@
       }, 100);
 
       setTimeout(() => {
+        document.getElementById("sound-final").play();
         launchConfetti();
         document.getElementById("final-msg").innerHTML = `
           🔥 Você acaba de GANHAR <span style="color:#F44336">90% DE DESCONTO</span><br><br>
