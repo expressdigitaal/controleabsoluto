@@ -211,8 +211,23 @@
           <div id="wheel-box" style="margin-top:30px;"></div>
         </div>
       `;
-    }
 
+      // 🚨 TRACKING QUIZ COMPLETED
+      fetch("https://cdn.utmify.com.br/scripts/pixel/event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          pixel_id: window.pixelId,
+          event_name: "QuizCompleted",
+          custom_data: {
+            score: score,
+            tempo: Math.round(performance.now() / 1000),
+            dispositivo: navigator.userAgent,
+            origem: "Quiz Diagnóstico"
+          }
+        })
+      });
+    }
     function spinWheel() {
       document.getElementById("sound-spin").play();
 
@@ -260,6 +275,21 @@
             👉 ACESSAR SITE OFICIAL AGORA
           </a>
         `;
+
+        // 🚨 TRACKING WHEEL SPIN
+        fetch("https://cdn.utmify.com.br/scripts/pixel/event", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            pixel_id: window.pixelId,
+            event_name: "WheelSpin",
+            custom_data: {
+              resultado: "90% OFF",
+              origem: "Roleta Pós-Quiz"
+            }
+          })
+        });
+
       }, 4500);
     }
 
