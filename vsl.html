@@ -22,6 +22,31 @@
     })();
   </script>
 
+  <!-- EVENTO DE CONVERSÃO TRACKING -->
+  <script>
+    (function() {
+      const pixelId = window.pixelId || "68c8c474648bfb224dfe38db";
+      const url = "https://cdn.utmify.com.br/scripts/pixel/event";
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          pixel_id: pixelId,
+          event_name: "Purchase",
+          value: 197,
+          currency: "BRL",
+          custom_data: {
+            produto: "Controle Absoluto",
+            tipo: "Venda Confirmada"
+          }
+        })
+      });
+    })();
+  </script>
+
   <style>
     body {
       background: #0f0f0f;
