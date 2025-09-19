@@ -2,172 +2,259 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Controle Absoluto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico Mental</title>
   <style>
     body {
-      margin: 0;
-      background: #000;
+      background: #0f0f0f;
       color: #fff;
       font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      flex-direction: column;
+      min-height: 100vh;
       text-align: center;
     }
-    h1 {
-      margin: 60px 20px 10px;
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 900;
-      color: #fff;
-    }
-    h1 .accent {
-      color: #e31616;
-      text-shadow: 0 0 22px rgba(227,22,22,.55);
-    }
-    .sub {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-      color: #ccc;
-    }
-    .line {
-      font-size: 1rem;
-      color: #b9b9b9;
-      margin-bottom: 28px;
-    }
-    .vsl-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 2px solid rgba(255, 59, 59, .45);
-      box-shadow: 0 0 25px rgba(227, 22, 22, .45);
-    }
-    .vsl-wrapper iframe {
+    .quiz-box {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
       width: 100%;
-      aspect-ratio: 16/9;
-      border: 0;
-      background: #000;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
     }
-    .cta-aggressive {
-      display: inline-block;
-      margin: 32px auto 0;
-      padding: 18px 30px;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 900;
+    h1, h2, p {
+      text-align: center;
+    }
+    button {
       background: linear-gradient(180deg, #ff1a1a, #800000);
-      border: 1px solid rgba(255, 0, 0, .7);
       color: #fff;
-      text-transform: uppercase;
-      box-shadow: 0 0 20px rgba(255, 0, 0, .6);
-      animation: pulse 2s infinite;
-      text-decoration: none;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
     }
-    .cta-aggressive:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(255, 0, 0, .85);
+    .option {
+      padding: 12px;
+      background: #292929;
+      border: 1px solid #ff1a1a;
+      border-radius: 6px;
+      margin: 10px 0;
+      cursor: pointer;
+      text-align: center;
     }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 12px rgba(255, 0, 0, .6); }
-      50% { box-shadow: 0 0 26px rgba(255, 0, 0, 1); }
+    .option:hover {
+      background: #3a3a3a;
     }
-    .hidden { display: none; }
+    .progress {
+      background: #333;
+      border-radius: 6px;
+      overflow: hidden;
+      height: 10px;
+      margin-bottom: 20px;
+    }
+    .bar {
+      height: 100%;
+      width: 0;
+      background: #ff1a1a;
+      transition: .4s;
+    }
+    #score-display {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #ffd700;
+    }
+    canvas#confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
   </style>
 </head>
 <body>
+  <canvas id="confetti"></canvas>
 
-  <h1>Chegou o <span class="accent">Controle Absoluto</span></h1>
-  <div class="sub">O Método Anti-Ansiedade Sexual</div>
-  <p class="line">Sem papo furado. Sem promessas vazias. Só aquilo que faz a sua mente parar de te sabotar.</p>
-
-  <div class="vsl-wrapper">
-    <script type="text/javascript">
-      var s = document.createElement("script");
-      s.src = "https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js";
-      s.async = true;
-      document.head.appendChild(s);
-    </script>
-
-    <div id="ifr_68c74b2e6d470f9d2862ad2f_wrapper" style="margin: 0 auto; width: 100%;">
-      <div id="ifr_68c74b2e6d470f9d2862ad2f_aspect" style="position: relative; padding: 56.6666666667% 0 0 0;">
-        <iframe
-          id="ifr_68c74b2e6d470f9d2862ad2f"
-          frameborder="0"
-          allowfullscreen
-          src="about:blank"
-          referrerpolicy="origin"
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-          onload="this.onload=null; this.src='https://scripts.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/players/68c74b2e6d470f9d2862ad2f/v4/embed.html' + (location.search || '?') + '&vl=' + encodeURIComponent(location.href)">
-        </iframe>
-      </div>
-    </div>
+  <div class="quiz-box" id="quiz-screen">
+    <h1>VOCÊ TEM O CONTROLE OU É CONTROLADO?</h1>
+    <p style="margin-bottom:20px;">Responda com honestidade brutal. Cada escolha revela mais do que você imagina.</p>
+    <div class="progress"><div id="progress-bar" class="bar"></div></div>
+    <h2 id="question"></h2>
+    <div id="options"></div>
+    <div id="score-display">Pontuação: 0 pontos</div>
   </div>
 
-  <!-- CTA AGRESSIVO COM DELAY -->
-  <div id="cta-vsl" class="hidden">
-    <a href="https://quiz.cakto.com.br/preview/monjauru-de-pobre-WGIbQP" class="cta-aggressive">🔥 QUERO DOMINAR MINHA PERFORMANCE AGORA</a>
-  </div>
+  <audio id="spin-sound" preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4e3f8dd15b.mp3?filename=success-1-6297.mp3" type="audio/mp3">
+  </audio>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      setTimeout(function(){
-        var cta = document.getElementById('cta-vsl');
-        if(cta){ cta.classList.remove('hidden'); }
-      }, 95000); // Delay de 1:35
-    });
+    const questions = [
+      {q: "Você já brochou e ficou com isso martelando na cabeça por dias?", o: ["Nunca", "Uma vez só", "Algumas vezes", "Perdi as contas"]},
+      {q: "Você sente que perdeu o controle da sua própria mente?", o: ["Não", "Pouco", "Sim", "Completamente"]},
+      {q: "Na hora H, sua mente já te sabotou?", o: ["Nunca", "Uma vez", "Algumas vezes", "Quase sempre"]},
+      {q: "Você já se sentiu um impostor ao tentar se impor?", o: ["Não", "Raramente", "Frequentemente", "Sempre"]},
+      {q: "Você depende de estímulos externos pra se sentir capaz?", o: ["Não", "Às vezes", "Com frequência", "Sempre"]},
+      {q: "Quanto do seu dia é dominado por ansiedade silenciosa?", o: ["Quase nada", "Um pouco", "Metade", "Quase tudo"]},
+      {q: "Você sente que já perdeu oportunidades por falta de coragem?", o: ["Nunca", "Algumas", "Muitas", "Quase todas"]},
+      {q: "Se sua mente fosse uma arma, ela te protegeria ou te sabotaria?", o: ["Sempre protege", "Às vezes protege", "Mais sabota", "Sempre sabota"]},
+      {q: "Você tem medo de fracassar a ponto de nem tentar?", o: ["Não", "Pouco", "Sim", "Quase sempre"]},
+      {q: "Se existisse um método discreto e direto para dominar sua confiança, você usaria?", o: ["Talvez", "Provavelmente", "Com certeza", "IMEDIATAMENTE"]}
+    ];
+
+    let current = 0, score = 0;
+
+    function showQuestion() {
+      const q = questions[current];
+      document.getElementById("question").innerText = q.q;
+      const optDiv = document.getElementById("options");
+      optDiv.innerHTML = "";
+      q.o.forEach((opt, i) => {
+        const btn = document.createElement("div");
+        btn.className = "option";
+        btn.innerText = opt;
+        btn.onclick = () => nextQuestion(i);
+        optDiv.appendChild(btn);
+      });
+      document.getElementById("progress-bar").style.width = ((current) / questions.length * 100) + "%";
+    }
+
+    function nextQuestion(choice) {
+      const points = (choice + 1) * 10;
+      score += points;
+      document.getElementById("score-display").innerText = `+${points} pontos! Total: ${score} pontos`;
+
+      current++;
+      if (current < questions.length) {
+        setTimeout(() => showQuestion(), 300);
+      } else {
+        setTimeout(() => showResult(), 500);
+      }
+    }
+
+    function showResult() {
+      const box = document.getElementById("quiz-screen");
+      box.innerHTML = `
+        <h2>Resultado do Diagnóstico</h2>
+        <p style="margin-bottom:20px;">
+          ${
+            score < 120 ? "Você ainda mantém certo controle. Mas as rachaduras já começaram." :
+            score < 180 ? "Você está à beira de um colapso emocional. A dúvida te domina." :
+            "Você perdeu o controle. Agora só uma reprogramação completa pode te salvar."
+          }
+        </p>
+        <div style="text-align:center;margin:30px 0;">
+          <strong>🎯 Gire a roleta e receba a sua chance de dominar sua mente.</strong>
+          <br><br>
+          <button onclick="spinWheel()">🎰 GIRAR ROLETA</button>
+          <div id="wheel-box" style="margin-top:30px;"></div>
+        </div>
+      `;
+    }
+    function spinWheel() {
+      const wheelBox = document.getElementById("wheel-box");
+      wheelBox.innerHTML = `
+        <div style="position:relative;width:250px;height:250px;margin:auto;">
+          <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);
+              width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;
+              border-bottom:30px solid #fff;"></div>
+          <div style="width:100%;height:100%;display:flex;justify-content:center;align-items:center;">
+            <svg id="svg-wheel" viewBox="0 0 100 100" style="width:100%;height:100%;transition:transform 4s ease-out; transform-origin: 50% 50%;">
+              <g>
+                <path d="M50,50 L50,0 A50,50 0 0,1 93.3,25 Z" fill="#4CAF50"></path>
+                <text x="75" y="20" fill="#000" font-size="6" transform="rotate(18 75 20)">10%</text>
+                <path d="M50,50 L93.3,25 A50,50 0 0,1 75,93.3 Z" fill="#FFEB3B"></path>
+                <text x="82" y="60" fill="#000" font-size="6" transform="rotate(110 82 60)">25%</text>
+                <path d="M50,50 L75,93.3 A50,50 0 0,1 6.7,75 Z" fill="#FF9800"></path>
+                <text x="40" y="90" fill="#000" font-size="6" transform="rotate(180 40 90)">50%</text>
+                <path d="M50,50 L6.7,75 A50,50 0 0,1 50,0 Z" fill="#F44336"></path>
+                <text x="15" y="35" fill="#fff" font-size="6" transform="rotate(270 15 35)">90%</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div id="final-msg" style="margin-top:20px;font-size:1.2rem;font-weight:bold;">Girando...</div>
+      `;
+
+      const svg = document.getElementById("svg-wheel");
+      const base = 360 * 4;
+      const stopAt = 315;
+      const finalRotation = base + (360 - stopAt);
+
+      document.getElementById("spin-sound").play();
+
+      setTimeout(() => {
+        svg.style.transform = `rotate(${finalRotation}deg)`;
+      }, 100);
+
+      setTimeout(() => {
+        launchConfetti();
+
+        document.getElementById("final-msg").innerHTML = `
+          🔥 Você acaba de GANHAR <span style="color:#F44336">90% DE DESCONTO</span><br><br>
+          <a href="https://go.tribopay.com.br/hv2ffayiwn" target="_blank"
+            style="display:inline-block;margin-top:10px;padding:14px 24px;
+            background:linear-gradient(180deg,#ff1a1a,#800000);color:#fff;font-weight:bold;
+            border-radius:6px;text-decoration:none;box-shadow:0 0 15px rgba(255,0,0,0.7);">
+            👉 ACESSAR A PÁGINA DE DOMÍNIO AGORA
+          </a>
+        `;
+      }, 4500);
+    }
+
+    function launchConfetti(){
+      const canvas = document.getElementById("confetti");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      for(let i = 0; i < 150; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          r: Math.random() * 6 + 4,
+          d: Math.random() * 100 + 10,
+          color: `hsl(${Math.random() * 360},100%,50%)`,
+          tilt: Math.random() * 10 - 10
+        });
+      }
+
+      function draw(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.fillStyle = p.color;
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+          ctx.fill();
+        });
+        update();
+      }
+
+      function update(){
+        particles.forEach(p => {
+          p.y += (Math.cos(p.d) + 2) + 0.5;
+          p.x += Math.sin(p.d);
+          if(p.y > canvas.height){
+            p.y = -10;
+            p.x = Math.random() * canvas.width;
+          }
+        });
+      }
+
+      setInterval(draw, 20);
+    }
+
+    window.onload = showQuestion;
   </script>
-
-<script>
-(function () {
-  const BACK_URL = "https://suaofertaaqui";
-  let armed = true;
-  let navigating = false;
-
-  // Desarma nos CTAs
-  document.addEventListener("click", function (e) {
-    const a = e.target.closest("a");
-    if (a && a.href) {
-      navigating = true;
-      armed = false;
-      setTimeout(() => { navigating = false; armed = true; }, 1500);
-    }
-  }, true);
-
-  // Trap do botão voltar
-  function trapHistory() {
-    try { history.pushState({}, "", location.href); } catch(e) {}
-  }
-  trapHistory();
-  setTimeout(trapHistory, 60);
-
-  window.addEventListener("popstate", function () {
-    if (armed) {
-      location.replace(BACK_URL);
-    } else {
-      setTimeout(trapHistory, 100);
-    }
-  });
-
-  // Fecha aba ou troca app (iOS/Android/PC)
-  window.addEventListener("pagehide", function () {
-    if (armed && !navigating) {
-      location.replace(BACK_URL);
-    }
-  });
-
-  // Aba em background
-  document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "hidden" && armed && !navigating) {
-      location.replace(BACK_URL);
-    }
-  });
-
-  // Volta de background (iOS específico)
-  window.addEventListener("pageshow", function (e) {
-    if (e.persisted && armed && !navigating) {
-      location.replace(BACK_URL);
-    }
-  });
-})();
-</script>
-
 </body>
 </html>
