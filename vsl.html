@@ -111,15 +111,9 @@
     <div id="score-display">Pontuação: 0 pontos</div>
   </div>
 
-  <!-- Áudios COM NOMES CORRETOS -->
-  <audio id="sound-click" preload="auto">
-    <source src="victory-click.mp3" type="audio/mp3">
-  </audio>
-  <audio id="sound-spin" preload="auto">
-    <source src="victory-spin.mp3" type="audio/mp3">
-  </audio>
+  <!-- ÁUDIO FINAL FUNCIONAL VIA CATBOX -->
   <audio id="sound-final" preload="auto">
-    <source src="victory-final.mp3" type="audio/mp3">
+    <source src="https://files.catbox.moe/gangvk.mp3" type="audio/mp3">
   </audio>
 
   <script>
@@ -147,10 +141,7 @@
         const btn = document.createElement("div");
         btn.className = "option";
         btn.innerText = opt;
-        btn.onclick = () => {
-          document.getElementById("sound-click").play();
-          nextQuestion(i);
-        };
+        btn.onclick = () => nextQuestion(i);
         optDiv.appendChild(btn);
       });
       document.getElementById("progress-bar").style.width = ((current) / questions.length * 100) + "%";
@@ -160,7 +151,6 @@
       const points = (choice + 1) * 10;
       score += points;
       document.getElementById("score-display").innerText = `+${points} pontos! Total: ${score} pontos`;
-
       current++;
       if (current < questions.length) {
         setTimeout(() => showQuestion(), 300);
@@ -190,8 +180,7 @@
     }
 
     function spinWheel() {
-      document.getElementById("sound-spin").play();
-
+      document.getElementById("sound-final").play();
       const wheelBox = document.getElementById("wheel-box");
       wheelBox.innerHTML = `
         <div style="position:relative;width:250px;height:250px;margin:auto;">
@@ -220,13 +209,11 @@
       const base = 360 * 4;
       const stopAt = 315;
       const finalRotation = base + (360 - stopAt);
-
       setTimeout(() => {
         svg.style.transform = `rotate(${finalRotation}deg)`;
       }, 100);
 
       setTimeout(() => {
-        document.getElementById("sound-final").play();
         launchConfetti();
         document.getElementById("final-msg").innerHTML = `
           🔥 Você acaba de GANHAR <span style="color:#F44336">90% DE DESCONTO</span><br><br>
@@ -245,7 +232,6 @@
       const ctx = canvas.getContext("2d");
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-
       const particles = [];
       for(let i = 0; i < 150; i++) {
         particles.push({
@@ -257,7 +243,6 @@
           tilt: Math.random() * 10 - 10
         });
       }
-
       function draw(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         particles.forEach(p => {
@@ -268,7 +253,6 @@
         });
         update();
       }
-
       function update(){
         particles.forEach(p => {
           p.y += (Math.cos(p.d) + 2) + 0.5;
@@ -279,7 +263,6 @@
           }
         });
       }
-
       setInterval(draw, 20);
     }
 
