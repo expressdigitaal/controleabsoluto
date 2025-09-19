@@ -104,12 +104,6 @@
     .cta-aggressive:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(255,0,0,.85)}
     @keyframes pulse{0%{box-shadow:0 0 12px rgba(255,0,0,.6)}50%{box-shadow:0 0 26px rgba(255,0,0,1)}100%{box-shadow:0 0 12px rgba(255,0,0,.6)}}
     .hidden{display:none}
-
-    body.delay-lock section:not(.hero),
-    body.delay-lock .blade,
-    body.delay-lock .cols,
-    body.delay-lock footer,
-    body.delay-lock .floating { display:none !important; }
   </style>
 </head>
 <body>
@@ -151,7 +145,7 @@
 </div>
 
 <!-- CTA agressivo -->
-<div id="cta-vsl" class="hidden" style="text-align:center">
+<div id="cta-vsl" style="text-align:center">
   <a href="https://go.tribopay.com.br/hv2ffayiwn" class="cta-aggressive">🔥 QUERO DOMINAR MINHA PERFORMANCE AGORA</a>
 </div>
 
@@ -227,16 +221,6 @@
 </div>
 
 <script>
-// Delay de 1:35 (95s)
-document.addEventListener('DOMContentLoaded', function(){
-  document.body.classList.add('delay-lock');
-  setTimeout(function(){
-    var cta = document.getElementById('cta-vsl');
-    if(cta){ cta.classList.remove('hidden'); }
-    document.body.classList.remove('delay-lock');
-  }, 95000);
-});
-
 // Contador regressivo de 4 minutos
 let time = 4 * 60; 
 const countdownEl = document.getElementById("countdown");
