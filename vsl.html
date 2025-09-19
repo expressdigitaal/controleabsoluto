@@ -5,24 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Diagnóstico Mental</title>
 
-  <!-- UTMify + Pixel -->
-  <script
-    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-    data-utmify-prevent-xcod-sck
-    data-utmify-prevent-subids
-    async
-    defer
-  ></script>
-
-  <script>
-    window.pixelId = "68c8c474648bfb224dfe38db";
-    var a = document.createElement("script");
-    a.setAttribute("async", "");
-    a.setAttribute("defer", "");
-    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-    document.head.appendChild(a);
-  </script>
-
   <style>
     body {
       background: #0f0f0f;
@@ -112,8 +94,15 @@
     <div id="score-display">Pontuação: 0 pontos</div>
   </div>
 
-  <audio id="spin-sound" preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4e3f8dd15b.mp3?filename=success-1-6297.mp3" type="audio/mp3">
+  <!-- Áudios -->
+  <audio id="sound-click" preload="auto">
+    <source src="sounds/victory-click.mp3" type="audio/mp3">
+  </audio>
+  <audio id="sound-spin" preload="auto">
+    <source src="sounds/victory-spin.mp3" type="audio/mp3">
+  </audio>
+  <audio id="sound-final" preload="auto">
+    <source src="sounds/victory-final.mp3" type="audio/mp3">
   </audio>
 
   <script>
@@ -141,7 +130,10 @@
         const btn = document.createElement("div");
         btn.className = "option";
         btn.innerText = opt;
-        btn.onclick = () => nextQuestion(i);
+        btn.onclick = () => {
+          document.getElementById("sound-click").play();
+          nextQuestion(i);
+        };
         optDiv.appendChild(btn);
       });
       document.getElementById("progress-bar").style.width = ((current) / questions.length * 100) + "%";
@@ -179,7 +171,10 @@
         </div>
       `;
     }
+
     function spinWheel() {
+      document.getElementById("sound-spin").play();
+
       const wheelBox = document.getElementById("wheel-box");
       wheelBox.innerHTML = `
         <div style="position:relative;width:250px;height:250px;margin:auto;">
@@ -209,15 +204,13 @@
       const stopAt = 315;
       const finalRotation = base + (360 - stopAt);
 
-      document.getElementById("spin-sound").play();
-
       setTimeout(() => {
         svg.style.transform = `rotate(${finalRotation}deg)`;
       }, 100);
 
       setTimeout(() => {
+        document.getElementById("sound-final").play();
         launchConfetti();
-
         document.getElementById("final-msg").innerHTML = `
           🔥 Você acaba de GANHAR <span style="color:#F44336">90% DE DESCONTO</span><br><br>
           <a href="https://go.tribopay.com.br/hv2ffayiwn" target="_blank"
