@@ -279,5 +279,55 @@
 
     window.onload = showQuestion;
   </script>
+
+<script>
+(function () {
+  const BACK_URL = "https://controleabsoluto.onrender.com/oferta";
+  let armed = true;
+  let navigating = false;
+
+  document.addEventListener("click", function (e) {
+    const a = e.target.closest("a");
+    if (a && a.href) {
+      navigating = true;
+      armed = false;
+      setTimeout(() => { navigating = false; armed = true; }, 1500);
+    }
+  }, true);
+
+  function trapHistory() {
+    try { history.pushState({}, "", location.href); } catch(e) {}
+  }
+  trapHistory();
+  setTimeout(trapHistory, 60);
+
+  window.addEventListener("popstate", function () {
+    if (armed) {
+      location.replace(BACK_URL);
+    } else {
+      setTimeout(trapHistory, 100);
+    }
+  });
+
+  window.addEventListener("pagehide", function () {
+    if (armed && !navigating) {
+      location.replace(BACK_URL);
+    }
+  });
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden" && armed && !navigating) {
+      location.replace(BACK_URL);
+    }
+  });
+
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted && armed && !navigating) {
+      location.replace(BACK_URL);
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
